@@ -17,6 +17,7 @@
 		DB4E0E1829F7D828007D6341 /* ExampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E0E1729F7D828007D6341 /* ExampleAppUITests.swift */; };
 		DB4E0E1A29F7D828007D6341 /* ExampleAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E0E1929F7D828007D6341 /* ExampleAppUITestsLaunchTests.swift */; };
 		DB4E0E2729F7D8BD007D6341 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E0E2629F7D8BD007D6341 /* ViewModel.swift */; };
+		DB4E0E2929F7E1B7007D6341 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E0E2829F7E1B7007D6341 /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		DB4E0E1729F7D828007D6341 /* ExampleAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAppUITests.swift; sourceTree = "<group>"; };
 		DB4E0E1929F7D828007D6341 /* ExampleAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DB4E0E2629F7D8BD007D6341 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		DB4E0E2829F7E1B7007D6341 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 		DB4E0DEA29F7D821007D6341 = {
 			isa = PBXGroup;
 			children = (
+				DB4E0E2829F7E1B7007D6341 /* Package.swift */,
 				DB4E0DF529F7D822007D6341 /* ExampleApp */,
 				DB4E0E0C29F7D828007D6341 /* ExampleAppTests */,
 				DB4E0E1629F7D828007D6341 /* ExampleAppUITests */,
@@ -268,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB4E0E2929F7E1B7007D6341 /* Package.swift in Sources */,
 				DB4E0E2729F7D8BD007D6341 /* ViewModel.swift in Sources */,
 				DB4E0E0329F7D827007D6341 /* ExampleApp.xcdatamodeld in Sources */,
 				DB4E0E0029F7D827007D6341 /* Persistence.swift in Sources */,
