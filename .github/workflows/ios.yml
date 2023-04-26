@@ -6,8 +6,6 @@ jobs:
   sending-email:
     runs-on: macos-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
       - name: Send email
         uses: dawidd6/action-send-mail@v3
         with:
