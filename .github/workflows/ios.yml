@@ -7,13 +7,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Send email
-        uses: dawidd6/action-send-mail@v3
+        uses: dawidd6/action-send-mail@v3.7.2
         with:
           connection_url: ${{secrets.MAIL_CONNECTION}}
           # Required mail server address if not connection_url:
           server_address: smtp.mail.yahoo.com
           # Server port, default 25:
-          server_port: 587
+          server_port: 465
           # Optional whether this connection use TLS (default is true if server_port is 465)
           secure: true
           ignore_cert: true
