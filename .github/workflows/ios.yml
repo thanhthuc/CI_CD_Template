@@ -31,7 +31,7 @@ jobs:
           # Optional plain body:
           body: Build job of ${{github.repository}} completed successfully!
           # Optional HTML body read from file:
-          html_body: file://README.html
+          html_body: https://github.com/thanhthuc/CI_CD_Template/blob/main/README.md
   test:
     name: Test
     runs-on: macos-latest
