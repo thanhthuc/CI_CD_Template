@@ -23,7 +23,7 @@ jobs:
               # Optional (recommended) mail server username:
           username: nguyenthanhthuc.devpro@gmail.com#${{secrets.MAIL_USERNAME}}
               # Optional (recommended) mail server password:
-          password: mbvfcheixzgktkao#iiovocdezpyawgke #${{secrets.MAIL_PASSWORD}}
+          password: Songnhubill1993@dev#mbvfcheixzgktkao#iiovocdezpyawgke #${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
           subject: Github Actions job result - Flip
           # Required recipients' addresses:
