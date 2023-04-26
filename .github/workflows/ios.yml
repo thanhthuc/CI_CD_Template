@@ -9,14 +9,14 @@ jobs:
     - name: Send some mail
       uses: wadeww/send-email-action@master
       with:
-      server_address: smtp.gmail.com
-      port: 465
-      username: ${{secrets.MAIL_USERNAME}}
-      password: ${{secrets.MAIL_PASSWORD}}
-      subject: Workflow finished
-      body: Job completed ${{job.status}}
-      to: thanhthuc.ng@samsung.com
-      from: Me
+        server_address: smtp.gmail.com
+        port: 465
+        username: ${{secrets.MAIL_USERNAME}}
+        password: ${{secrets.MAIL_PASSWORD}}
+        subject: Workflow finished
+        body: Job completed ${{job.status}}
+        to: thanhthuc.ng@samsung.com
+        from: Me
 #      - name: Check out repository code
 #        uses: actions/checkout@v2
 #      - name: Send email
