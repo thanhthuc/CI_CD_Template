@@ -17,11 +17,11 @@ jobs:
           # Server port, default 25:
           server_port: 465
           # Optional whether this connection use TLS (default is true if server_port is 465)
-          secure: false
+          secure: true
               # Optional (recommended) mail server username:
-          username: ${{secrets.MAIL_USERNAME}}
+          username: thanhthuc041293@gmail.com #${{secrets.MAIL_USERNAME}}
               # Optional (recommended) mail server password:
-          password: ${{secrets.MAIL_PASSWORD}}
+          password: MacbookGmail@2906#${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
           subject: Github Actions job result - Flip
           # Required recipients' addresses:
