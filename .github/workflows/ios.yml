@@ -15,7 +15,7 @@ jobs:
           # Required mail server address if not connection_url:
           server_address: smtp.mail.yahoo.com
           # Server port, default 25:
-          server_port: 587
+          server_port: 993
           # Optional whether this connection use TLS (default is true if server_port is 465)
           secure: true
 #          ignore_cert: true
