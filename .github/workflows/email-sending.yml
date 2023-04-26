@@ -9,37 +9,6 @@ on:
     workflow_dispatch:
 
 jobs:
-  main:
-    runs-on: macos-latest
-    strategy:
-      max-parallel: 1
-      matrix:
-        include:
-          - subject: Plain body (attachment)
-            attachments: action.yml
-            body: |
-              first line
-              second line
-          - subject: HTML body (attachments)
-            attachments: package.json,package-lock.json
-            html_body: |
-              <!DOCTYPE html>
-              <html>
-              <body>
-              <h1>Heading</h1>
-              <p>Paragraph</p>
-              </body>
-              </html>
-          - subject: Plain body (Markdown)
-            convert_markdown: true
-            body: file://README.md
-          - subject: HTML body (Markdown)
-            convert_markdown: true
-            html_body: file://README.md
-          - subject: Multipart body (Markdown)
-            convert_markdown: true
-            body: file://README.md
-            html_body: file://README.md
   sending-email:
     runs-on: macos-latest
     steps:
