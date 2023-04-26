@@ -21,7 +21,7 @@ jobs:
               # Optional (recommended) mail server username:
           username: thanhthucbkinfo@​yahoo.com.vn#nguyenthanhthuc.devpro@gmail.com#${{secrets.MAIL_USERNAME}}
               # Optional (recommended) mail server password:
-          password: Songnhub93@Yahoo#iwpbahhkyhmcfxfi#mbvfcheixzgktkao#iiovocdezpyawgke #${{secrets.MAIL_PASSWORD}}
+          password: kziilamghpycxosc#Songnhub93@Yahoo#iwpbahhkyhmcfxfi#mbvfcheixzgktkao#iiovocdezpyawgke #${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
           subject: Github Actions job result - Flip
           # Required recipients' addresses:
