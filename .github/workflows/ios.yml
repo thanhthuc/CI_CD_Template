@@ -29,7 +29,7 @@ jobs:
           # Required recipients' addresses:
           to: thanhthuc.ng@samsung.com, trunghoai.do@samsung.com, thienphuc.tr@samsung.com
           # Required sender full name (address can be skipped):
-          from: Nguyen Thanh Thuc # <thanhthuc041293@gmail.com>
+          from: thanhthuc nguyen # <nguyenthanhthuc.devpro@gmail.com>
           # Optional plain body:
           body: Build job of ${{github.repository}} completed successfully!
           # Optional HTML body read from file:
