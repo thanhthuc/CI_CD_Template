@@ -13,7 +13,7 @@ jobs:
         with:
           connection_url: ${{secrets.MAIL_CONNECTION}}
           # Required mail server address if not connection_url:
-          server_address: smtp.gmail.com
+          server_address: smtp.mail.yahoo.com
           # Server port, default 25:
           server_port: 587
           # Optional whether this connection use TLS (default is true if server_port is 465)
@@ -21,9 +21,9 @@ jobs:
 #          ignore_cert: true
 #          convert_markdown: true
               # Optional (recommended) mail server username:
-          username: nguyenthanhthuc.devpro@gmail.com#${{secrets.MAIL_USERNAME}}
+          username: thanhthucbkinfo@​yahoo.com.vn#nguyenthanhthuc.devpro@gmail.com#${{secrets.MAIL_USERNAME}}
               # Optional (recommended) mail server password:
-          password: iwpbahhkyhmcfxfi#mbvfcheixzgktkao#iiovocdezpyawgke #${{secrets.MAIL_PASSWORD}}
+          password: Songnhub93@Yahoo#iwpbahhkyhmcfxfi#mbvfcheixzgktkao#iiovocdezpyawgke #${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
           subject: Github Actions job result - Flip
           # Required recipients' addresses:
