@@ -22,9 +22,9 @@ jobs:
           xcodebuild clean test -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleAppTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env:
          destination: ${{ matrix.destination }}
-    sending-email:
-      runs-on: macos-latest
-      steps:
+   sending-email:
+     runs-on: macos-latest
+     steps:
         - name: Check out repository code
           uses: actions/checkout@v2
         - name: Send email
