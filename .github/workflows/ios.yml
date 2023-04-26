@@ -7,7 +7,7 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Send some mail
-      uses: wadeww/send-email-action@master
+      uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.gmail.com
         port: 465
