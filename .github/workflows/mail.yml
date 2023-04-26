@@ -1,3 +1,10 @@
+name: CI-Email
+
+on: [push]
+
+jobs:
+  test:
+    steps:
      - name: Send mail
          uses:dawidd6/action-send-mail@v3.7.2
          with:
