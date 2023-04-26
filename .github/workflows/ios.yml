@@ -9,7 +9,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Send email
-        uses: dawidd6/action-send-mail@v3.7.2
+        uses: dawidd6/action-send-mail@v3
         with:
           connection_url: ${{secrets.MAIL_CONNECTION}}
           # Required mail server address if not connection_url:
@@ -23,7 +23,7 @@ jobs:
               # Optional (recommended) mail server username:
           username: nguyenthanhthuc.devpro@gmail.com#${{secrets.MAIL_USERNAME}}
               # Optional (recommended) mail server password:
-          password: iiovocdezpyawgke #${{secrets.MAIL_PASSWORD}}
+          password: mbvfcheixzgktkao#iiovocdezpyawgke #${{secrets.MAIL_PASSWORD}}
           # Required mail subject:
           subject: Github Actions job result - Flip
           # Required recipients' addresses:
