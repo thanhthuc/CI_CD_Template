@@ -6,34 +6,45 @@ jobs:
   sending-email:
     runs-on: macos-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - name: Send email
-        uses: dawidd6/action-send-mail@v3
-        with:
-          connection_url: ${{secrets.MAIL_CONNECTION}}
-          # Required mail server address if not connection_url:
-          server_address: smtp.gmail.com
-          # Server port, default 25:
-          server_port: 465
-          # Optional whether this connection use TLS (default is true if server_port is 465)
-          secure: true
-#          ignore_cert: true
-#          convert_markdown: true
-              # Optional (recommended) mail server username:
-          username: nguyenthanhthuc.devpro@gmail.com#${{secrets.MAIL_USERNAME}}
-              # Optional (recommended) mail server password:
-          password: iiovocdezpyawgke#Songnhubill1993@dev#mbvfcheixzgktkao#iiovocdezpyawgke #${{secrets.MAIL_PASSWORD}}
-          # Required mail subject:
-          subject: Github Actions job result - Flip
-          # Required recipients' addresses:
-          to: thanhthuc.ng@samsung.com, trunghoai.do@samsung.com, thienphuc.tr@samsung.com
-          # Required sender full name (address can be skipped):
-          from: thanhthuc nguyen # <nguyenthanhthuc.devpro@gmail.com>
-          # Optional plain body:
-          body: Build job of ${{github.repository}} completed successfully!
-          # Optional HTML body read from file:
-          html_body: https://github.com/thanhthuc/CI_CD_Template/blob/main/README.md
+    - name: Send some mail
+      uses: wadeww/send-email-action@master
+      with:
+      server_address: smtp.gmail.com
+      port: 465
+      username: ${{secrets.MAIL_USERNAME}}
+      password: ${{secrets.MAIL_PASSWORD}}
+      subject: Workflow finished
+      body: Job completed ${{job.status}}
+      to: thanhthuc.ng@samsung.com
+      from: Me
+#      - name: Check out repository code
+#        uses: actions/checkout@v2
+#      - name: Send email
+#        uses: dawidd6/action-send-mail@v3
+#        with:
+#          connection_url: ${{secrets.MAIL_CONNECTION}}
+#          # Required mail server address if not connection_url:
+#          server_address: smtp.gmail.com
+#          # Server port, default 25:
+#          server_port: 465
+#          # Optional whether this connection use TLS (default is true if server_port is 465)
+#          secure: true
+##          ignore_cert: true
+##          convert_markdown: true
+#              # Optional (recommended) mail server username:
+#          username: nguyenthanhthuc.devpro@gmail.com#${{secrets.MAIL_USERNAME}}
+#              # Optional (recommended) mail server password:
+#          password: iiovocdezpyawgke#Songnhubill1993@dev#mbvfcheixzgktkao#iiovocdezpyawgke #${{secrets.MAIL_PASSWORD}}
+#          # Required mail subject:
+#          subject: Github Actions job result - Flip
+#          # Required recipients' addresses:
+#          to: thanhthuc.ng@samsung.com, trunghoai.do@samsung.com, thienphuc.tr@samsung.com
+#          # Required sender full name (address can be skipped):
+#          from: thanhthuc nguyen # <nguyenthanhthuc.devpro@gmail.com>
+#          # Optional plain body:
+#          body: Build job of ${{github.repository}} completed successfully!
+#          # Optional HTML body read from file:
+#          html_body: https://github.com/thanhthuc/CI_CD_Template/blob/main/README.md
   test:
     name: Test
     runs-on: macos-latest
