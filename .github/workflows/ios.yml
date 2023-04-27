@@ -30,7 +30,7 @@ jobs:
     needs: [test]
     
     # Only run this workflow if it target is main branch on pull request event
-    if: ${{ github.base_ref == 'main' && github.event_name == 'pull_request' }}
+    if: ${{ github.base_ref == 'main' }} # && github.event_name == 'pull_request'
     
     steps:
       - uses: abinoda/slack-action@master
