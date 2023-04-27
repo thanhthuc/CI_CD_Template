@@ -3,7 +3,6 @@ name: CI-Test
 on: [push]
 
 jobs:
-  
   build:
     name: Start Build
     runs-on: macos-latest
@@ -25,13 +24,13 @@ jobs:
         matrix:
           destination: ['platform=iOS Simulator,OS=16.2,name=iPhone 11']
     steps:
-#      - name: Checkout
-#        uses: actions/checkout@master
-#      - name: Build
-#        run: |
-#          xcodebuild clean build -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleApp -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-#        env:
-#         destination: ${{ matrix.destination }}
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Build
+        run: |
+          xcodebuild clean build -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleApp -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        env:
+         destination: ${{ matrix.destination }}
       - name: Test
         run: |
           xcodebuild clean test -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleAppTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
