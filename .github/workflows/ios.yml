@@ -27,7 +27,7 @@ jobs:
     name: Notify on Slack
     runs-on: macos-latest
     # Only run this workflow when "build" workflow succeeds
-    # needs: [test]
+    needs: [test]
     
     # Only run this workflow if it target is main branch on pull request event
     # if: ${{ github.base_ref == 'main' }} # && github.event_name == 'pull_request'
