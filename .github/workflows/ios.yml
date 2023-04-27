@@ -1,6 +1,14 @@
 name: CI-Test
 
-on: [push]
+on: [push] # TAKE NOTE: on pull request or on push
+
+#on:
+#  push:
+#    branches:
+#    - master
+#  pull_request:
+#    branches:
+#    - master
 
 jobs:
   test:
