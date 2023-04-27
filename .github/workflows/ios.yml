@@ -3,6 +3,19 @@ name: CI-Test
 on: [push]
 
 jobs:
+  
+  build:
+    name: Start Build
+    runs-on: macos-latest
+    strategy:
+        matrix:
+          destination: ['platform=iOS Simulator,OS=16.2,name=iPhone 11']
+    steps:
+      - name: Build
+        run: |
+          xcodebuild clean build -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleApp -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        env:
+         destination: ${{ matrix.destination }}
   test:
     name: Test
     runs-on: macos-latest
@@ -27,10 +40,10 @@ jobs:
     name: Notify on Slack
     runs-on: macos-latest
     # Only run this workflow when "build" workflow succeeds
-    needs: [test]
+    needs: [build]
     
     # Only run this workflow if it target is main branch on pull request event
-    # if: ${{ github.base_ref == 'main' }} # && github.event_name == 'pull_request'
+    # if: ${{ github.base_ref == 'main' && github.event_name == 'pull_request' }}
     
     steps:
       - uses: 8398a7/action-slack@v3.15.1
