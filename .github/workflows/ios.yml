@@ -3,35 +3,6 @@ name: CI-Test
 on: [push]
 
 jobs:
-  sending-email:
-    runs-on: macos-latest
-    steps:
-      - name: Send email
-        uses: dawidd6/action-send-mail@v3.7.2
-        with:
-          connection_url: ${{secrets.MAIL_CONNECTION}}
-          # Required mail server address if not connection_url:
-          server_address: smtp.mail.yahoo.com
-          # Server port, default 25:
-          server_port: 465
-          # Optional whether this connection use TLS (default is true if server_port is 465)
-          secure: true
-          ignore_cert: true
-          convert_markdown: true
-              # Optional (recommended) mail server username:
-          username: thanhthucbkinfo@​yahoo.com.vn#nguyenthanhthuc.devpro@gmail.com#${{secrets.MAIL_USERNAME}}
-              # Optional (recommended) mail server password:
-          password: kziilamghpycxosc#Songnhub93@Yahoo#iwpbahhkyhmcfxfi#mbvfcheixzgktkao#iiovocdezpyawgke #${{secrets.MAIL_PASSWORD}}
-          # Required mail subject:
-          subject: Github Actions job result - Flip
-          # Required recipients' addresses:
-          to: thanhthuc.ng@samsung.com, trunghoai.do@samsung.com, thienphuc.tr@samsung.com
-          # Required sender full name (address can be skipped):
-          from: thanhthuc nguyen # <nguyenthanhthuc.devpro@gmail.com>
-          # Optional plain body:
-          body: Build job of ${{github.repository}} completed successfully!
-          # Optional HTML body read from file:
-          html_body: https://github.com/thanhthuc/CI_CD_Template/blob/main/README.md
   test:
     name: Test
     runs-on: macos-latest
@@ -51,53 +22,23 @@ jobs:
           xcodebuild clean test -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleAppTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env:
          destination: ${{ matrix.destination }}
-
-              
-#      - name: Send mail
-#          uses: dawidd6/action-send-mail@v3.7.2
-#          with:
-#            # Specify connection via URL (replaces server_address, server_port, secure,
-#            # username and password)
-#            #
-#            # Format:
-#            #
-#            #  * smtp://user:password@server:port
-#            #  * smtp+starttls://user:password@server:port
-#            connection_url: ${{secrets.MAIL_CONNECTION}}
-#            # Required mail server address if not connection_url:
-#            server_address: smtp.gmail.com
-#            # Server port, default 25:
-#            server_port: 465
-#            # Optional whether this connection use TLS (default is true if server_port is 465)
-#            secure: true
-#            # Optional (recommended) mail server username:
-#            username: ${{secrets.MAIL_USERNAME}}
-#            # Optional (recommended) mail server password:
-#            password: ${{secrets.MAIL_PASSWORD}}
-#            # Required mail subject:
-#            subject: Github Actions job result - Flip
-#            # Required recipients' addresses:
-#            to: thanhthuc.ng@samsung.com, trunghoai.do@samsung.com, thienphuc.tr@samsung.com
-#            # Required sender full name (address can be skipped):
-#            from: Thanh Thuc # <thanhthuc041293@gmail.com>
-#            # Optional plain body:
-#            body: Build job of ${{github.repository}} completed successfully!
-#            # Optional HTML body read from file:
-#            html_body: file://README.html
-#            # Optional carbon copy recipients:
-#            cc: kyloren@example.com,leia@example.com
-#            # Optional blind carbon copy recipients:
-#            bcc: r2d2@example.com,hansolo@example.com
-#            # Optional recipient of the email response:
-#            reply_to: luke@example.com
-#            # Optional Message ID this message is replying to:
-#            in_reply_to: <random-luke@example.com>
-#            # Optional unsigned/invalid certificates allowance:
-#            ignore_cert: true
-#            # Optional converting Markdown to HTML (set content_type to text/html too):
-#            convert_markdown: true
-#            # Optional attachments:
-#            attachments: attachments.zip,git.diff,./dist/static/*.js
-#            # Optional priority: 'high', 'normal' (default) or 'low'
-#            priority: low
-#
+  #notify workflow for slack notification
+  notify:
+    name: Notify on Slack
+    runs-on: macos-latest
+    # Only run this workflow when "build" workflow succeeds
+    needs: [build]
+    
+    # Only run this workflow if it target is main branch on pull request event
+    if: ${{ github.base_ref == 'main' && github.event_name == 'pull_request' }}
+    
+    steps:
+      - uses: abinoda/slack-action@master
+        env:
+          # required
+          SLACK_BOT_TOKEN: $ {{ secrets.SLACK_BOT_TOKEN }}
+        with:
+          # custom message to send to slack
+          args: '{\"channel\":\"${{ secrets.SLACK_PR_CHANNEL_ID }}\",\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Pull Request:* ${{ github.event.pull_request.title }}\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Contributor :* ${{ github.event.pull_request.user.login }}\n*Request State:* ${{ github.event.pull_request.state }}\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"<${{ github.event.pull_request.html_url }}|View Pull Request>\"}}]}'
+        # pick up events even if the job is success.
+        if: success()
