@@ -3,11 +3,11 @@ name: CI-Test
 on: [push]
 
 jobs:
-  name: build
-  run: |
-    xcodebuild clean build -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleApp -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-  env:
-    destination: ${{ matrix.destination }}
+  build:
+    run: |
+      xcodebuild clean build -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleApp -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+    env:
+      destination: ${{ matrix.destination }}
     
   test:
     name: Test
