@@ -3,6 +3,12 @@ name: CI-Test
 on: [push]
 
 jobs:
+  name: build
+  run: |
+    xcodebuild clean build -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleApp -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+  env:
+    destination: ${{ matrix.destination }}
+    
   test:
     name: Test
     runs-on: macos-latest
@@ -27,7 +33,7 @@ jobs:
     name: Notify on Slack
     runs-on: macos-latest
     # Only run this workflow when "build" workflow succeeds
-    needs: [Build]
+    needs: [build]
     
     # Only run this workflow if it target is main branch on pull request event
     if: ${{ github.base_ref == 'main' && github.event_name == 'pull_request' }}
