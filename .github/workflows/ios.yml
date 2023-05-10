@@ -23,6 +23,7 @@ jobs:
       - name: Build
         run: |
           xcodebuild clean build -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleApp -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        fastlane run build_app
         env:
          destination: ${{ matrix.destination }}
       - name: Test
