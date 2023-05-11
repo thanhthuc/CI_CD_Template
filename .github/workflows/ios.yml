@@ -28,7 +28,7 @@ jobs:
       - name: Delete keychain
         if: always() # Always run this step to ensure the keychain is properly disposed of
         run: |
-          security delete-keychain "${{ env.KEYCHAIN }}".keychain
+          security delete-keychain build.keychain
           
       # Import Certificate and provisioning
       - name: Import signing certificate
