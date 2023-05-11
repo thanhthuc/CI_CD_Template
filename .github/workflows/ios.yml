@@ -38,6 +38,13 @@ jobs:
           exec .github/scripts/import-profile.sh
       # === End import ===
       
+      # Upload build
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build.log
+          path: ~/Library/Logs/gym/*.log
+      
       - name: Build
         run: |
           xcodebuild clean build -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleApp -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
