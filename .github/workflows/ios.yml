@@ -12,25 +12,6 @@ on: [push] # TAKE NOTE: on pull request or on push
 
 
 #=====
-#      # Delete keychain after use
-#      - name: Delete keychain
-#        if: always() # Always run this step to ensure the keychain is properly disposed of
-#        run: |
-#          security delete-keychain build.keychain
-#
-#      # Import Certificate and provisioning
-#      - name: Import signing certificate
-#        env:
-#          SIGNING_CERTIFICATE_P12_DATA: ${{ secrets.SIGNING_CERTIFICATE_P12_DATA }}
-#          SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
-#        run: |
-#          exec .github/scripts/import-certificate.sh
-#      - name: Import provisioning profile
-#        env:
-#          PROVISIONING_PROFILE_DATA: ${{ secrets.PROVISIONING_PROFILE_DATA }}
-#        run: |
-#          exec .github/scripts/import-profile.sh
-#      # === End import ===
       
       
 
@@ -49,36 +30,28 @@ jobs:
           xcodebuild clean build -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleApp -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env:
          destination: ${{ matrix.destination }}
-         
-      # Upload build
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: build.log
-          path: ~/Library/Logs/gym/*.log
-      # ===End upload===
       
       - name: Test
         run: |
           xcodebuild clean test -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleAppTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env:
          destination: ${{ matrix.destination }}
-      - name: Notify On Slack
-        uses: 8398a7/action-slack@v3.15.1
-        env:
-          # required
-          SLACK_WEBHOOK_URL: ${{ secrets.CICD_SLACK }}
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
-          custom_payload: |
-              {
-                attachments: [{
-                  color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                  text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
-                }]
-              }
-        if: always()
+#      - name: Notify On Slack
+#        uses: 8398a7/action-slack@v3.15.1
+#        env:
+#          # required
+#          SLACK_WEBHOOK_URL: ${{ secrets.CICD_SLACK }}
+#        with:
+#          status: ${{ job.status }}
+#          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+#          custom_payload: |
+#              {
+#                attachments: [{
+#                  color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+#                  text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
+#                }]
+#              }
+#        if: always()
 
   deploy:
     name: Deploying to Testflight
@@ -86,4 +59,36 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
-        
+
+      # Import Certificate and provisioning
+      - name: Import signing certificate
+        env:
+          SIGNING_CERTIFICATE_P12_DATA: ${{ secrets.SIGNING_CERTIFICATE_P12_DATA }}
+          SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
+        run: |
+          exec .github/scripts/import-certificate.sh
+      - name: Import provisioning profile
+        env:
+          PROVISIONING_PROFILE_DATA: ${{ secrets.PROVISIONING_PROFILE_DATA }}
+        run: |
+          exec .github/scripts/import-profile.sh
+      # === End import ===
+      
+      # upload to
+      - name: Archiving iOS Project
+        env:
+          PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        run: ./.github/scripts/archive_ios_app.sh
+      - name: Exporting .ipa
+        run: ./.github/scripts/export_ios_ipa.sh
+      - name: Publishing iOS App TestFlight
+        if: success()
+        env:
+          APP_STORE_CONNECT_USERNAME: ${{ secrets.APP_STORE_CONNECT_USERNAME }}
+          APP_STORE_CONNECT_PASSWORD: ${{ secrets.APP_STORE_CONNECT_PASSWORD }}
+        run: ./.github/scripts/publish_ios_testflight.sh
+      # Delete keychain after use
+      - name: Delete keychain
+        if: always() # Always run this step to ensure the keychain is properly disposed of
+        run: |
+          security delete-keychain build.keychain
