@@ -88,7 +88,6 @@ jobs:
           APP_STORE_CONNECT_PASSWORD: ${{ secrets.APP_STORE_CONNECT_PASSWORD }}
         run: ./.github/scripts/publish_testflight.sh
       # Delete keychain after use
-      - name: Delete keychain
-        if: always() # Always run this step to ensure the keychain is properly disposed of
-        run: |
-          security delete-keychain build.keychain
+      - name: Delete profile after publish
+        if: success() # Always run this step to ensure the keychain is properly disposed of
+        run: ./.github/scripts/delete_profile.sh
