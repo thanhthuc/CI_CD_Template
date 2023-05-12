@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-xcodebuild -project ExampleApp/ExampleApp \
+xcodebuild -project ExampleApp/ExampleApp.xcodeproj \
             -scheme ExampleApp
             -configuration AppStoreDistribution \
             -archivePath $PWD/build/ExampleApp.xcarchive \
