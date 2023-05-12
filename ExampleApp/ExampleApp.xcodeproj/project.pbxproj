@@ -17,6 +17,7 @@
 		DB4E0E1829F7D828007D6341 /* ExampleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E0E1729F7D828007D6341 /* ExampleAppUITests.swift */; };
 		DB4E0E1A29F7D828007D6341 /* ExampleAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E0E1929F7D828007D6341 /* ExampleAppUITestsLaunchTests.swift */; };
 		DB4E0E2729F7D8BD007D6341 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E0E2629F7D8BD007D6341 /* ViewModel.swift */; };
+		DBF9FF622A0E65CD00C3645D /* exportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBF9FF612A0E65CD00C3645D /* exportOptions.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		DB4E0E1729F7D828007D6341 /* ExampleAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAppUITests.swift; sourceTree = "<group>"; };
 		DB4E0E1929F7D828007D6341 /* ExampleAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DB4E0E2629F7D8BD007D6341 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		DBF9FF612A0E65CD00C3645D /* exportOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = exportOptions.plist; path = ../../exportOptions.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				DB4E0DF629F7D822007D6341 /* ExampleAppApp.swift */,
 				DB4E0E2629F7D8BD007D6341 /* ViewModel.swift */,
+				DBF9FF612A0E65CD00C3645D /* exportOptions.plist */,
 				DB4E0DF829F7D822007D6341 /* ContentView.swift */,
 				DB4E0DFA29F7D827007D6341 /* Assets.xcassets */,
 				DB4E0DFF29F7D827007D6341 /* Persistence.swift */,
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB4E0DFE29F7D827007D6341 /* Preview Assets.xcassets in Resources */,
+				DBF9FF622A0E65CD00C3645D /* exportOptions.plist in Resources */,
 				DB4E0DFB29F7D827007D6341 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
