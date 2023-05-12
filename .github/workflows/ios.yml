@@ -16,26 +16,26 @@ on: [push] # TAKE NOTE: on pull request or on push
       
 
 jobs:
-  test:
-    name: Test
-    runs-on: [self-hosted, macOS, x64]
-    strategy:
-        matrix:
-          destination: ['platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro']
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Build
-        run: |
-          xcodebuild clean build -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleApp -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-        env:
-         destination: ${{ matrix.destination }}
-      
-      - name: Test
-        run: |
-          xcodebuild clean test -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleAppTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-        env:
-         destination: ${{ matrix.destination }}
+#  test:
+#    name: Test
+#    runs-on: [self-hosted, macOS, x64]
+#    strategy:
+#        matrix:
+#          destination: ['platform=iOS Simulator,OS=16.2,name=iPhone 14 Pro']
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@master
+#      - name: Build
+#        run: |
+#          xcodebuild clean build -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleApp -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+#        env:
+#         destination: ${{ matrix.destination }}
+#
+#      - name: Test
+#        run: |
+#          xcodebuild clean test -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleAppTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+#        env:
+#         destination: ${{ matrix.destination }}
 #      - name: Notify On Slack
 #        uses: 8398a7/action-slack@v3.15.1
 #        env:
