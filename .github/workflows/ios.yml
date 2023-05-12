@@ -109,12 +109,12 @@ jobs:
         env:
           PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
         run: ./.github/scripts/archive_app.sh
-        continue-on-error: true
+        if: always()
       - name: Exporting .ipa
         run: ./.github/scripts/export_ipa.sh
-        continue-on-error: true
+        if: always()
       - name: Publishing iOS App TestFlight
-#        if: success()
+        if: always()
         env:
           APP_STORE_CONNECT_USERNAME: ${{ secrets.APP_STORE_CONNECT_USERNAME }}
           APP_STORE_CONNECT_PASSWORD: ${{ secrets.APP_STORE_CONNECT_PASSWORD }}
@@ -122,6 +122,6 @@ jobs:
         continue-on-error: true
       # Delete keychain after use
       - name: Delete profile after publish
-#        if: success() # Always run this step to ensure the keychain is properly disposed of
+        if: always()  # Always run this step to ensure the keychain is properly disposed of
         run: ./.github/scripts/delete_profile.sh
         continue-on-error: true
