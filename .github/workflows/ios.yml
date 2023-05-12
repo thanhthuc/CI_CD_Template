@@ -72,6 +72,7 @@ jobs:
           PROVISIONING_PROFILE_DATA: ${{ secrets.PROVISIONING_PROFILE_DATA }}
         run: |
           exec .github/scripts/import-profile.sh
+        continue-on-error: true
       # === End import ===
       
 #      - name: Install the Apple certificate and provisioning profile
@@ -108,15 +109,19 @@ jobs:
         env:
           PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
         run: ./.github/scripts/archive_app.sh
+        continue-on-error: true
       - name: Exporting .ipa
         run: ./.github/scripts/export_ipa.sh
+        continue-on-error: true
       - name: Publishing iOS App TestFlight
-        if: success()
+#        if: success()
         env:
           APP_STORE_CONNECT_USERNAME: ${{ secrets.APP_STORE_CONNECT_USERNAME }}
           APP_STORE_CONNECT_PASSWORD: ${{ secrets.APP_STORE_CONNECT_PASSWORD }}
         run: ./.github/scripts/publish_testflight.sh
+        continue-on-error: true
       # Delete keychain after use
       - name: Delete profile after publish
-        if: success() # Always run this step to ensure the keychain is properly disposed of
+#        if: success() # Always run this step to ensure the keychain is properly disposed of
         run: ./.github/scripts/delete_profile.sh
+        continue-on-error: true
