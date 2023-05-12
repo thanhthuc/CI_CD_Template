@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-xcodebuild -project ExampleApp/ExampleApp.xcodeproj \
+xcodebuild -target ExampleApp/ExampleApp \
             -scheme ExampleApp
             -sdk iphoneos \
             -configuration AppStoreDistribution \
