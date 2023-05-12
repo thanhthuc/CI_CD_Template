@@ -78,15 +78,15 @@ jobs:
       - name: Archiving iOS Project
         env:
           PR_NUMBER: $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-        run: ./.github/scripts/archive_ios_app.sh
+        run: ./.github/scripts/archive_app.sh
       - name: Exporting .ipa
-        run: ./.github/scripts/export_ios_ipa.sh
+        run: ./.github/scripts/export_ipa.sh
       - name: Publishing iOS App TestFlight
         if: success()
         env:
           APP_STORE_CONNECT_USERNAME: ${{ secrets.APP_STORE_CONNECT_USERNAME }}
           APP_STORE_CONNECT_PASSWORD: ${{ secrets.APP_STORE_CONNECT_PASSWORD }}
-        run: ./.github/scripts/publish_ios_testflight.sh
+        run: ./.github/scripts/publish_testflight.sh
       # Delete keychain after use
       - name: Delete keychain
         if: always() # Always run this step to ensure the keychain is properly disposed of
