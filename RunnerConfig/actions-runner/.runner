@@ -1,9 +1,0 @@
-﻿{
-  "agentId": 22,
-  "agentName": "Thuc-2",
-  "poolId": 1,
-  "poolName": "Default",
-  "serverUrl": "https://pipelines.actions.githubusercontent.com/CwLs6e2H7J4S2AyKGSatBtfHfF3rVb0BLpLeS0BwxN8irbdPoy",
-  "gitHubUrl": "https://github.com/thanhthuc/CI_CD_Template",
-  "workFolder": "_work"
-}
