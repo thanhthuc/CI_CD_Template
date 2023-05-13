@@ -122,7 +122,7 @@ jobs:
         run: ./.github/scripts/publish_testflight.sh
         continue-on-error: true
       # Delete keychain after use
-      - name: Delete profile after publish
-        if: always()  # Always run this step to ensure the keychain is properly disposed of
-        run: ./.github/scripts/delete_profile.sh
-        continue-on-error: true
+#      - name: Delete profile after publish
+#        if: always()  # Always run this step to ensure the keychain is properly disposed of
+#        run: ./.github/scripts/delete_profile.sh
+#        continue-on-error: true
