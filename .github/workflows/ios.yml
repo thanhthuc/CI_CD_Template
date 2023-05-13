@@ -55,7 +55,8 @@ jobs:
 
   deploy:
     name: Deploying to Testflight
-    runs-on: [self-hosted, macOS, x64]
+    #runs-on: [self-hosted, macOS, x64]
+    runs-on: [self-hosted, macOS, ARM64]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
