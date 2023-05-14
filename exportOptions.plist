@@ -9,7 +9,7 @@
 	<key>signingStyle</key>
 	<string>manual</string>
 	<key>signingCertificate</key>
-	<string>iOS Distribution: thanh thuc nguyen (5579AKUF8S)</string>
+	<string>iOS Distribution</string>
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>app.demo.cicd</key>
