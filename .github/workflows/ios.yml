@@ -59,12 +59,14 @@ jobs:
           SIGNING_CERTIFICATE_PASSWORD: ${{ secrets.SIGNING_CERTIFICATE_PASSWORD }}
         run: |
           exec .github/scripts/import-certificate.sh
+        if: always()
       - name: Import provisioning profile
         env:
           PROVISIONING_PROFILE_DATA: ${{ secrets.PROVISIONING_PROFILE_DATA }}
         run: |
           exec .github/scripts/import-profile.sh
         continue-on-error: true
+        if: always()
       # === End import ===
       
 #      - name: Install the Apple certificate and provisioning profile
