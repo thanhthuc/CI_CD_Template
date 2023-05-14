@@ -60,6 +60,7 @@ jobs:
         run: |
           exec .github/scripts/import-certificate.sh
         if: always()
+        continue-on-error: true
       - name: Import provisioning profile
         env:
           PROVISIONING_PROFILE_DATA: ${{ secrets.PROVISIONING_PROFILE_DATA }}
