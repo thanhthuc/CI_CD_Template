@@ -27,22 +27,6 @@ jobs:
 #          xcodebuild clean test -project ExampleApp/ExampleApp.xcodeproj -scheme ExampleAppTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
 #        env:
 #         destination: ${{ matrix.destination }}
-#      - name: Notify On Slack
-#        uses: 8398a7/action-slack@v3.15.1
-#        env:
-#          # required
-#          SLACK_WEBHOOK_URL: ${{ secrets.CICD_SLACK }}
-#        with:
-#          status: ${{ job.status }}
-#          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
-#          custom_payload: |
-#              {
-#                attachments: [{
-#                  color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-#                  text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
-#                }]
-#              }
-#        if: always()
 
   deploy:
     name: Deploying to Testflight
@@ -120,3 +104,19 @@ jobs:
 #        if: always()  # Always run this step to ensure the keychain is properly disposed of
 #        run: ./.github/scripts/delete_profile.sh
 #        continue-on-error: true
+      - name: Notify On Slack
+        uses: 8398a7/action-slack@v3.15.1
+        env:
+          # required
+          SLACK_WEBHOOK_URL: ${{ secrets.CICD_SLACK }}
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+          custom_payload: |
+              {
+                attachments: [{
+                  color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                  text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
+                }]
+              }
+        if: always()
